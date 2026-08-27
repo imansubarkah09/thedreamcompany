@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Dream Company — A Digital Manifesto</title>
+<meta name="description" content="The Dream Company is an ecosystem of products, systems, and experiments — a digital laboratory for turning ideas into things that matter." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #08090c;
+    --bg-soft: #0d0f14;
+    --panel: #101319;
+    --line: rgba(255, 255, 255, 0.08);
+    --line-strong: rgba(255, 255, 255, 0.16);
+    --text: #e9ecf2;
+    --text-dim: #9aa2b1;
+    --text-faint: #5c6373;
+    --accent: #6ea8ff;
+    --accent-2: #9b8cff;
+    --accent-warm: #ffb47a;
+    --glow: rgba(110, 168, 255, 0.35);
+    --maxw: 1120px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ---------- ambient background ---------- */
+  .bg-layer {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(900px 600px at 12% -5%, rgba(110, 168, 255, 0.12), transparent 60%),
+      radial-gradient(800px 700px at 92% 8%, rgba(155, 140, 255, 0.10), transparent 60%),
+      radial-gradient(700px 700px at 50% 120%, rgba(255, 180, 122, 0.06), transparent 55%);
+  }
+  .bg-grid {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 78%);
+    -webkit-mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 78%);
+    opacity: 0.5;
+  }
+
+  /* ---------- layout ---------- */
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+
+  section { padding: 130px 0; position: relative; }
+  section + section { border-top: 1px solid var(--line); }
+
+  .eyebrow {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 26px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 26px;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.6;
+  }
+
+  h1, h2, h3 { font-family: "Fraunces", Georgia, serif; font-weight: 600; letter-spacing: -0.02em; line-height: 1.08; }
+  h2 { font-size: clamp(2rem, 4.5vw, 3.2rem); margin-bottom: 26px; }
+  h3 { font-size: 1.3rem; letter-spacing: -0.01em; }
+
+  .lead { font-size: clamp(1.05rem, 1.7vw, 1.28rem); color: var(--text-dim); max-width: 62ch; }
+
+  p + p { margin-top: 1.1em; }
+  .prose p { color: var(--text-dim); max-width: 64ch; }
+  .prose strong { color: var(--text); font-weight: 600; }
+
+  /* ---------- nav ---------- */
+  header.nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(8, 9, 12, 0.72);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .brand .dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 14px var(--glow);
+  }
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+  .nav-links { display: flex; gap: 30px; }
+  .nav-links a {
+    color: var(--text-faint);
+    text-decoration: none;
+    font-size: 13.5px;
+    letter-spacing: 0.02em;
+    transition: color 0.2s var(--ease);
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-toggle { display: none; background: none; border: 0; color: var(--text); font-size: 22px; cursor: pointer; }
+
+  .lang-switch {
+    display: flex;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    overflow: hidden;
+    flex: none;
+  }
+  .lang-switch button {
+    background: none;
+    border: 0;
+    cursor: pointer;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--text-faint);
+    padding: 6px 11px;
+    transition: background 0.2s var(--ease), color 0.2s var(--ease);
+  }
+  .lang-switch button[aria-pressed="true"] { background: var(--text); color: #0a0b0e; }
+
+  [data-lang="en"] .lang-id, [data-lang="id"] .lang-en { display: none; }
+
+  /* ---------- hero ---------- */
+  .hero { padding: 150px 0 140px; text-align: center; overflow: hidden; }
+  .hero h1 {
+    font-size: clamp(2.7rem, 8vw, 6rem);
+    letter-spacing: -0.035em;
+    margin: 0 auto 34px;
+    max-width: 16ch;
+  }
+  .hero h1 .shimmer {
+    background: linear-gradient(100deg, var(--text) 20%, var(--accent) 40%, var(--accent-2) 55%, var(--text) 75%);
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 9s linear infinite;
+  }
+  @keyframes shimmer { to { background-position: -220% center; } }
+
+  .hero-manifesto {
+    font-family: "Fraunces", serif;
+    font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+    font-style: italic;
+    color: var(--text-dim);
+    line-height: 1.7;
+    max-width: 32ch;
+    margin: 0 auto 46px;
+  }
+  .hero-manifesto > span { display: block; }
+  .hero-manifesto > span.last { color: var(--text); font-style: normal; }
+
+  .cta-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 13px 24px;
+    border-radius: 999px;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: transform 0.2s var(--ease), background 0.2s var(--ease), border-color 0.2s var(--ease);
+  }
+  .btn-primary { background: var(--text); color: #0a0b0e; font-weight: 600; }
+  .btn-primary:hover { transform: translateY(-2px); }
+  .btn-ghost { border: 1px solid var(--line-strong); color: var(--text-dim); }
+  .btn-ghost:hover { border-color: var(--text-faint); color: var(--text); transform: translateY(-2px); }
+
+  /* orbiting abstract visual */
+  .orbits {
+    position: relative;
+    width: min(520px, 82vw);
+    height: min(520px, 82vw);
+    margin: 90px auto 0;
+  }
+  .orbits .ring {
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+  }
+  .orbits .ring.r2 { inset: 16%; border-color: var(--line-strong); }
+  .orbits .ring.r3 { inset: 32%; }
+  .orbits .core {
+    position: absolute;
+    inset: 42%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%, var(--accent), var(--accent-2) 70%);
+    box-shadow: 0 0 60px var(--glow), inset 0 0 30px rgba(255,255,255,0.25);
+    animation: pulse 6s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { transform: scale(1); opacity: 0.9; } 50% { transform: scale(1.08); opacity: 1; } }
+  .orbits .spin { position: absolute; inset: 0; animation: spin 26s linear infinite; }
+  .orbits .spin.rev { animation-duration: 40s; animation-direction: reverse; }
+  .orbits .node {
+    position: absolute;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--text);
+    box-shadow: 0 0 16px rgba(255,255,255,0.5);
+  }
+  .orbits .node.a { top: -6px; left: calc(50% - 6px); }
+  .orbits .node.b { top: 16%; right: 2%; background: var(--accent); }
+  .orbits .node.c { bottom: 32%; left: 0; background: var(--accent-2); }
+  .orbits .node.d { bottom: 4%; right: 24%; background: var(--accent-warm); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ---------- philosophy flow ---------- */
+  .flow {
+    margin-top: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: stretch;
+  }
+  .flow-step {
+    flex: 1 1 140px;
+    padding: 22px 18px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: linear-gradient(180deg, var(--panel), var(--bg-soft));
+    position: relative;
+  }
+  .flow-step .n {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+  .flow-step .t { font-family: "Fraunces", serif; font-size: 1.15rem; margin-top: 8px; }
+  .flow-step .d { font-size: 13.5px; color: var(--text-faint); margin-top: 6px; }
+  .flow-step:not(:last-child)::after {
+    content: "→";
+    position: absolute;
+    right: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-faint);
+    font-size: 14px;
+    z-index: 2;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+
+  .principle-list { list-style: none; margin-top: 8px; }
+  .principle-list li {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--text-dim);
+    display: flex;
+    gap: 14px;
+  }
+  .principle-list li::before { content: "—"; color: var(--accent); }
+
+  /* ---------- ecosystem map ---------- */
+  .eco-root {
+    text-align: center;
+    margin: 10px auto 40px;
+  }
+  .eco-root .badge {
+    display: inline-block;
+    padding: 12px 26px;
+    border-radius: 999px;
+    border: 1px solid var(--line-strong);
+    background: var(--panel);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    box-shadow: 0 0 40px rgba(110,168,255,0.12);
+  }
+  .eco-cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+  .eco-col > h3 {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    padding-bottom: 14px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid var(--line);
+    text-align: center;
+  }
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px;
+    background: linear-gradient(180deg, var(--panel), var(--bg-soft));
+    margin-top: 14px;
+    transition: transform 0.25s var(--ease), border-color 0.25s var(--ease);
+  }
+  .card:hover { transform: translateY(-3px); border-color: var(--line-strong); }
+  .card .name { font-family: "Fraunces", serif; font-size: 1.12rem; display: flex; align-items: center; gap: 9px; }
+  .card .name::before {
+    content: ""; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent); flex: none;
+  }
+  .eco-col:nth-child(1) .card .name::before { background: var(--accent-warm); }
+  .eco-col:nth-child(2) .card .name::before { background: var(--accent-2); }
+  .card .role { font-size: 13px; color: var(--text-faint); margin-top: 5px; }
+  .card .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .card .tags span {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    color: var(--text-dim);
+  }
+  .card.example { border-color: var(--line-strong); }
+  .card .evolve {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.02em;
+    color: var(--text-faint);
+    margin-top: 12px;
+    line-height: 1.5;
+  }
+  .card .evolve b { color: var(--text-dim); font-weight: 500; }
+  .card-link {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--accent);
+    text-decoration: none;
+    transition: gap 0.2s var(--ease), color 0.2s var(--ease);
+  }
+  .card-link:hover { color: var(--text); }
+
+  /* ---------- lifecycle ---------- */
+  .cycle { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 50px; }
+  .cycle-node {
+    flex: 1 1 160px;
+    text-align: center;
+    padding: 26px 16px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--panel);
+    position: relative;
+  }
+  .cycle-node .icon {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    color: var(--accent);
+  }
+  .cycle-node .label { font-family: "Fraunces", serif; font-size: 1.15rem; margin-top: 8px; }
+  .cycle-node .sub { font-size: 12.5px; color: var(--text-faint); margin-top: 4px; }
+
+  /* ---------- tech ---------- */
+  .tech-quote {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    color: var(--text);
+    max-width: 24ch;
+    line-height: 1.4;
+    margin-bottom: 50px;
+  }
+  .tech-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+  .tech-grid span {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    padding: 9px 15px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    color: var(--text-dim);
+    transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
+  }
+  .tech-grid span:hover { color: var(--text); border-color: var(--accent); }
+  .tech-note { margin-top: 34px; color: var(--text-faint); max-width: 58ch; font-size: 15px; }
+
+  /* ---------- AI era ---------- */
+  .equation {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 44px 0;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 15px;
+  }
+  .equation .row {
+    padding: 16px 20px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--panel);
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .equation .op { color: var(--accent); font-size: 18px; }
+  .equation .result {
+    border-color: var(--line-strong);
+    color: var(--text);
+    background: linear-gradient(180deg, rgba(110,168,255,0.10), var(--panel));
+  }
+  .role-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+  .role-cards .card .name::before { background: var(--accent-2); }
+  .not-autopilot {
+    margin-top: 28px;
+    font-family: "Fraunces", serif;
+    font-size: 1.25rem;
+    color: var(--text);
+  }
+
+  /* ---------- roadmap ---------- */
+  .roadmap { margin-top: 50px; border-left: 1px solid var(--line-strong); padding-left: 34px; }
+  .roadmap li { list-style: none; position: relative; padding: 20px 0; }
+  .roadmap li::before {
+    content: "";
+    position: absolute;
+    left: -40px;
+    top: 26px;
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+  }
+  .roadmap li h3 { font-size: 1.15rem; }
+  .roadmap li p { color: var(--text-faint); font-size: 14.5px; margin-top: 4px; max-width: 56ch; }
+  .roadmap li.future::before { border-color: var(--text-faint); }
+  .roadmap li.future h3 { color: var(--text-dim); }
+
+  /* ---------- closing ---------- */
+  .closing { text-align: center; padding: 150px 0 130px; }
+  .closing .manifesto {
+    font-family: "Fraunces", serif;
+    font-size: clamp(1.5rem, 3.6vw, 2.6rem);
+    line-height: 1.45;
+    letter-spacing: -0.02em;
+    max-width: 24ch;
+    margin: 0 auto 50px;
+  }
+  .closing .manifesto > span { display: block; opacity: 0.55; }
+  .closing .manifesto > span.hi { opacity: 1; }
+  .closing .signature {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  .closing .tagline {
+    margin-top: 14px;
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    color: var(--accent);
+    font-size: 1.1rem;
+  }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 40px 0 60px;
+    text-align: center;
+    color: var(--text-faint);
+    font-size: 13px;
+    font-family: "JetBrains Mono", monospace;
+    letter-spacing: 0.06em;
+  }
+
+  /* ---------- scroll reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 860px) {
+    section { padding: 90px 0; }
+    .nav-links { display: none; }
+    .nav-toggle { display: block; }
+    .nav-links.open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0; right: 0;
+      background: rgba(8,9,12,0.97);
+      border-bottom: 1px solid var(--line);
+      padding: 20px 28px;
+      gap: 18px;
+    }
+    .grid-2 { grid-template-columns: 1fr; gap: 34px; }
+    .eco-cols { grid-template-columns: 1fr; }
+    .role-cards { grid-template-columns: 1fr; }
+    .flow-step:not(:last-child)::after { content: "↓"; right: 50%; top: auto; bottom: -12px; transform: translateX(50%); }
+  }
+</style>
+</head>
+<body>
+<div class="bg-layer"></div>
+<div class="bg-grid"></div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand"><span class="dot"></span> The Dream Company</a>
+    <div class="nav-right">
+      <div class="lang-switch" role="group" aria-label="Language / Bahasa">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="id" aria-pressed="false">ID</button>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">≡</button>
+      <nav class="nav-links">
+        <a href="#philosophy"><span class="lang-en">Philosophy</span><span class="lang-id">Filosofi</span></a>
+        <a href="#built"><span class="lang-en">Built</span><span class="lang-id">Dibangun</span></a>
+        <a href="#how"><span class="lang-en">How We Build</span><span class="lang-id">Cara Membangun</span></a>
+        <a href="#tech"><span class="lang-en">Technology</span><span class="lang-id">Teknologi</span></a>
+        <a href="#ai"><span class="lang-en">The AI Era</span><span class="lang-id">Era AI</span></a>
+        <a href="#vision"><span class="lang-en">Vision</span><span class="lang-id">Visi</span></a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 1. HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <h1><span class="shimmer">The Dream Company</span></h1>
+      <p class="hero-manifesto">
+        <span><span class="lang-en">We turn ideas into systems.</span><span class="lang-id">Kami mengubah ide menjadi sistem.</span></span>
+        <span><span class="lang-en">We connect systems into ecosystems.</span><span class="lang-id">Kami menghubungkan sistem menjadi ekosistem.</span></span>
+        <span class="last"><span class="lang-en">We build dreams into something real.</span><span class="lang-id">Kami membangun mimpi menjadi sesuatu yang nyata.</span></span>
+      </p>
+      <div class="cta-row">
+        <a href="#built" class="btn btn-primary"><span class="lang-en">See what we've built →</span><span class="lang-id">Lihat yang telah dibangun →</span></a>
+        <a href="#philosophy" class="btn btn-ghost"><span class="lang-en">Read the philosophy</span><span class="lang-id">Baca filosofinya</span></a>
+      </div>
+
+      <div class="orbits" aria-hidden="true">
+        <div class="ring r1"></div>
+        <div class="ring r2"></div>
+        <div class="ring r3"></div>
+        <div class="core"></div>
+        <div class="spin"><div class="node a"></div><div class="node b"></div></div>
+        <div class="spin rev"><div class="node c"></div><div class="node d"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. PHILOSOPHY -->
+  <section id="philosophy">
+    <div class="wrap">
+      <span class="eyebrow reveal"><span class="lang-en">The Philosophy</span><span class="lang-id">Filosofi</span></span>
+      <h2 class="reveal"><span class="lang-en">An idea is not supposed to stay an idea.</span><span class="lang-id">Sebuah ide tidak seharusnya berhenti sebagai ide.</span></h2>
+      <div class="prose reveal" style="margin-top: 10px;">
+        <p>
+          <span class="lang-en">Most ideas die quietly — in notes apps, in conversations, in the gap between
+          <em>someone should build this</em> and <em>no one did</em>. The Dream Company
+          exists to close that gap.</span>
+          <span class="lang-id">Kebanyakan ide mati dalam diam — di aplikasi catatan, di percakapan, di celah antara
+          <em>seseorang harusnya membangun ini</em> dan <em>tidak ada yang melakukannya</em>. The Dream Company
+          ada untuk menutup celah itu.</span>
+        </p>
+        <p>
+          <span class="lang-en">The pattern is always the same. A real problem shows up. Instead of working around it,
+          we build a small system to solve it. The system gets used, and usage teaches us what it
+          should really be. The system becomes a <strong>product</strong>. Products that share the
+          same people, data, and purpose start connecting — and a connected set of products is an
+          <strong>ecosystem</strong>.</span>
+          <span class="lang-id">Polanya selalu sama. Sebuah masalah nyata muncul. Alih-alih menyiasatinya,
+          kami membangun sistem kecil untuk menyelesaikannya. Sistem itu dipakai, dan pemakaian mengajari
+          kami sistem itu sebenarnya harus menjadi apa. Sistem menjadi sebuah <strong>produk</strong>.
+          Produk yang berbagi orang, data, dan tujuan yang sama mulai saling terhubung — dan sekumpulan
+          produk yang terhubung adalah sebuah <strong>ekosistem</strong>.</span>
+        </p>
+        <p>
+          <span class="lang-en">Technology is what makes this possible for a small team. Work that once required a company
+          can now be done by a few people with clear thinking and the patience to keep building.
+          <strong>AI compresses the distance between an idea and a working version of it</strong> —
+          but building is still the part that teaches you anything.</span>
+          <span class="lang-id">Teknologi adalah yang membuat ini mungkin bagi tim kecil. Pekerjaan yang dulu butuh
+          sebuah perusahaan kini bisa dikerjakan beberapa orang dengan pemikiran jernih dan kesabaran
+          untuk terus membangun. <strong>AI memampatkan jarak antara sebuah ide dan versi kerjanya</strong> —
+          tapi membangun tetap bagian yang benar-benar mengajarkan sesuatu.</span>
+        </p>
+      </div>
+
+      <div class="flow reveal" aria-label="From dream to ecosystem">
+        <div class="flow-step"><div class="n">01</div><div class="t"><span class="lang-en">Dream</span><span class="lang-id">Mimpi</span></div><div class="d"><span class="lang-en">A vague sense that something could be better.</span><span class="lang-id">Firasat samar bahwa sesuatu bisa lebih baik.</span></div></div>
+        <div class="flow-step"><div class="n">02</div><div class="t"><span class="lang-en">Idea</span><span class="lang-id">Ide</span></div><div class="d"><span class="lang-en">The dream, made specific enough to argue with.</span><span class="lang-id">Mimpi yang dibuat cukup spesifik untuk diperdebatkan.</span></div></div>
+        <div class="flow-step"><div class="n">03</div><div class="t"><span class="lang-en">Experiment</span><span class="lang-id">Eksperimen</span></div><div class="d"><span class="lang-en">A rough version, built to be wrong quickly.</span><span class="lang-id">Versi kasar, dibuat untuk cepat salah.</span></div></div>
+        <div class="flow-step"><div class="n">04</div><div class="t"><span class="lang-en">System</span><span class="lang-id">Sistem</span></div><div class="d"><span class="lang-en">What survives contact with real use.</span><span class="lang-id">Yang bertahan setelah dipakai sungguhan.</span></div></div>
+        <div class="flow-step"><div class="n">05</div><div class="t"><span class="lang-en">Product</span><span class="lang-id">Produk</span></div><div class="d"><span class="lang-en">A system other people can rely on.</span><span class="lang-id">Sistem yang bisa diandalkan orang lain.</span></div></div>
+        <div class="flow-step"><div class="n">06</div><div class="t"><span class="lang-en">Ecosystem</span><span class="lang-id">Ekosistem</span></div><div class="d"><span class="lang-en">Products that make each other stronger.</span><span class="lang-id">Produk yang saling menguatkan.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. WHAT WE HAVE BUILT -->
+  <section id="built">
+    <div class="wrap">
+      <span class="eyebrow reveal"><span class="lang-en">What We Have Built</span><span class="lang-id">Yang Telah Kami Bangun</span></span>
+      <h2 class="reveal"><span class="lang-en">Not a portfolio. A connected map.</span><span class="lang-id">Bukan portofolio. Sebuah peta yang terhubung.</span></h2>
+      <p class="lead reveal">
+        <span class="lang-en">Each of these started as one problem worth solving. They're grouped by where they live —
+        but the point is how they connect back to the same center. Some start as tools for
+        ourselves; then the problem turns out to be bigger than us, and the tool becomes a platform.</span>
+        <span class="lang-id">Semuanya berawal dari satu masalah yang layak diselesaikan. Mereka dikelompokkan berdasarkan
+        tempatnya — tapi intinya adalah bagaimana semuanya terhubung kembali ke pusat yang sama.
+        Sebagian berawal sebagai alat untuk diri kami sendiri; lalu masalahnya ternyata lebih besar
+        dari kami, dan alat itu menjadi sebuah platform.</span>
+      </p>
+
+      <div class="eco-root reveal"><span class="badge">The Dream Company</span></div>
+
+      <div class="eco-cols">
+        <div class="eco-col reveal">
+          <h3><span class="lang-en">Business Systems</span><span class="lang-id">Sistem Bisnis</span></h3>
+          <div class="card">
+            <div class="name"><span class="lang-en">Business Operating System</span><span class="lang-id">Sistem Operasi Bisnis</span></div>
+            <div class="role"><span class="lang-en">One platform for a whole business — sales, operations, assets, profit-sharing, and automation in a single loop.</span><span class="lang-id">Satu platform untuk keseluruhan bisnis — penjualan, operasional, aset, bagi hasil, dan otomasi dalam satu putaran.</span></div>
+            <div class="tags"><span>sales</span><span>operations</span><span>profit-sharing</span><span>assets</span><span>automation</span></div>
+          </div>
+          <div class="card">
+            <div class="name"><span class="lang-en">Commerce &amp; Storefront Suite</span><span class="lang-id">Suite Commerce &amp; Etalase</span></div>
+            <div class="role"><span class="lang-en">Digital storefront plus the operational backbone behind it — orders, inventory, and reporting, ready to deploy for any product business.</span><span class="lang-id">Etalase digital beserta tulang punggung operasional di belakangnya — pesanan, inventori, dan pelaporan, siap diterapkan untuk bisnis produk apa pun.</span></div>
+            <div class="tags"><span>storefront</span><span>orders</span><span>inventory</span><span>reporting</span></div>
+          </div>
+        </div>
+
+        <div class="eco-col reveal">
+          <h3><span class="lang-en">Internal &amp; Experiments</span><span class="lang-id">Internal &amp; Eksperimen</span></h3>
+          <div class="card">
+            <div class="name">The Dream Company Portal</div>
+            <div class="role"><span class="lang-en">The front door to every system.</span><span class="lang-id">Pintu depan menuju setiap sistem.</span></div>
+            <div class="tags"><span>hub</span><span>access</span></div>
+          </div>
+          <div class="card">
+            <div class="name">Product Collector</div>
+            <div class="role"><span class="lang-en">A living index of everything we've built.</span><span class="lang-id">Indeks hidup dari semua yang telah kami bangun.</span></div>
+            <div class="tags"><span>registry</span><span>tracking</span></div>
+          </div>
+          <div class="card">
+            <div class="name"><span class="lang-en">Management Systems</span><span class="lang-id">Sistem Manajemen</span></div>
+            <div class="role"><span class="lang-en">Small internal tools that remove friction.</span><span class="lang-id">Alat internal kecil yang menghilangkan friksi.</span></div>
+            <div class="tags"><span>ops</span><span>workflow</span></div>
+          </div>
+          <div class="card example">
+            <div class="name">School Community</div>
+            <div class="role"><span class="lang-en">A platform for school and class administration, evolving from an internal management system into an online platform for TK&ndash;SMA communities.</span><span class="lang-id">Platform untuk administrasi sekolah dan kelas, berevolusi dari sistem manajemen internal menjadi platform online untuk komunitas TK&ndash;SMA.</span></div>
+            <div class="evolve">
+              <span class="lang-en">Management need &rarr; class administration system &rarr; <b>Management Kelas</b> &rarr; learning and iteration &rarr; online platform &rarr; <b>School Community</b></span>
+              <span class="lang-id">Kebutuhan manajemen &rarr; sistem administrasi kelas &rarr; <b>Management Kelas</b> &rarr; belajar dan iterasi &rarr; platform online &rarr; <b>School Community</b></span>
+            </div>
+            <div class="tags"><span>education</span><span>administration</span><span>platform</span></div>
+            <a class="card-link" href="https://schoolcommunity.space/" target="_blank" rel="noopener noreferrer"><span class="lang-en">Visit School Community &rarr;</span><span class="lang-id">Kunjungi School Community &rarr;</span></a>
+          </div>
+          <div class="card">
+            <div class="name"><span class="lang-en">Automation Tools</span><span class="lang-id">Alat Otomasi</span></div>
+            <div class="role"><span class="lang-en">Scripts and jobs that do the repetitive work.</span><span class="lang-id">Skrip dan job yang mengerjakan pekerjaan berulang.</span></div>
+            <div class="tags"><span>scheduling</span><span>glue</span></div>
+          </div>
+          <div class="card">
+            <div class="name"><span class="lang-en">AI-Powered Experiments</span><span class="lang-id">Eksperimen Bertenaga AI</span></div>
+            <div class="role"><span class="lang-en">Prototypes testing what's now possible.</span><span class="lang-id">Prototipe yang menguji apa yang kini mungkin.</span></div>
+            <div class="tags"><span>agents</span><span>prototypes</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. HOW WE BUILD -->
+  <section id="how">
+    <div class="wrap">
+      <span class="eyebrow reveal"><span class="lang-en">How We Build</span><span class="lang-id">Cara Kami Membangun</span></span>
+      <h2 class="reveal"><span class="lang-en">Nothing has to be perfect on the first try.</span><span class="lang-id">Tidak ada yang harus sempurna di percobaan pertama.</span></h2>
+      <div class="grid-2">
+        <div class="prose reveal">
+          <p>
+            <span class="lang-en">We don't plan for a year and launch once. We build the smallest useful version,
+            put it in front of real work, and let what we learn decide the next move.</span>
+            <span class="lang-id">Kami tidak merencanakan setahun lalu meluncurkan sekali. Kami membangun versi berguna
+            terkecil, menaruhnya di depan pekerjaan nyata, dan membiarkan apa yang kami pelajari
+            menentukan langkah berikutnya.</span>
+          </p>
+          <p>
+            <span class="lang-en">Most of what we know about a system, we learned <strong>after</strong> shipping it.
+            The loop matters more than any single release.</span>
+            <span class="lang-id">Sebagian besar yang kami tahu tentang sebuah sistem, kami pelajari <strong>setelah</strong>
+            merilisnya. Putarannya lebih penting daripada rilis mana pun.</span>
+          </p>
+          <ul class="principle-list">
+            <li><span class="lang-en">Start small, on a problem that's actually annoying someone.</span><span class="lang-id">Mulai kecil, dari masalah yang benar-benar mengganggu seseorang.</span></li>
+            <li><span class="lang-en">Solve the real thing, not the impressive-sounding version of it.</span><span class="lang-id">Selesaikan masalah yang sebenarnya, bukan versi yang terdengar mengesankan.</span></li>
+            <li><span class="lang-en">Ship early enough that usage can correct you.</span><span class="lang-id">Rilis cukup awal agar pemakaian bisa mengoreksimu.</span></li>
+            <li><span class="lang-en">Improve in small steps you can reverse.</span><span class="lang-id">Perbaiki dalam langkah kecil yang bisa dibatalkan.</span></li>
+            <li><span class="lang-en">Automate the work you've done by hand three times.</span><span class="lang-id">Otomasikan pekerjaan yang sudah kamu lakukan manual tiga kali.</span></li>
+            <li><span class="lang-en">Connect systems only when the connection earns its keep.</span><span class="lang-id">Hubungkan sistem hanya ketika koneksinya sepadan.</span></li>
+            <li><span class="lang-en">Scale last — after it clearly works.</span><span class="lang-id">Skalakan terakhir — setelah jelas berhasil.</span></li>
+          </ul>
+        </div>
+        <div class="reveal">
+          <div class="cycle">
+            <div class="cycle-node"><div class="icon">01</div><div class="label"><span class="lang-en">Build</span><span class="lang-id">Bangun</span></div><div class="sub"><span class="lang-en">Smallest thing that works</span><span class="lang-id">Hal terkecil yang berhasil</span></div></div>
+            <div class="cycle-node"><div class="icon">02</div><div class="label"><span class="lang-en">Learn</span><span class="lang-id">Belajar</span></div><div class="sub"><span class="lang-en">Watch real usage</span><span class="lang-id">Amati pemakaian nyata</span></div></div>
+            <div class="cycle-node"><div class="icon">03</div><div class="label"><span class="lang-en">Improve</span><span class="lang-id">Perbaiki</span></div><div class="sub"><span class="lang-en">Small, reversible steps</span><span class="lang-id">Langkah kecil yang bisa dibatalkan</span></div></div>
+            <div class="cycle-node"><div class="icon">04</div><div class="label"><span class="lang-en">Automate</span><span class="lang-id">Otomasi</span></div><div class="sub"><span class="lang-en">Remove the manual work</span><span class="lang-id">Hilangkan pekerjaan manual</span></div></div>
+            <div class="cycle-node"><div class="icon">05</div><div class="label"><span class="lang-en">Scale</span><span class="lang-id">Skalakan</span></div><div class="sub"><span class="lang-en">Only once it's proven</span><span class="lang-id">Hanya setelah terbukti</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. TECHNOLOGY -->
+  <section id="tech">
+    <div class="wrap">
+      <span class="eyebrow reveal"><span class="lang-en">Technology Playground</span><span class="lang-id">Taman Bermain Teknologi</span></span>
+      <p class="tech-quote reveal"><span class="lang-en">"Tools are temporary. The ability to build is permanent."</span><span class="lang-id">"Alat itu sementara. Kemampuan membangun itu permanen."</span></p>
+      <div class="tech-grid reveal">
+        <span>Python</span><span>TypeScript</span><span>JavaScript</span><span>SQL</span>
+        <span>PostgreSQL</span><span>SQL Server</span><span>dbt</span><span>Apache Airflow</span>
+        <span>Trino</span><span>Docker</span><span>GitHub</span><span>GitLab</span>
+        <span>Google Apps Script</span><span>Power Platform</span><span>Power BI</span>
+        <span>AI Coding Agents</span><span>ChatGPT</span><span>Claude</span><span>DeepSeek</span>
+      </div>
+      <p class="tech-note reveal">
+        <span class="lang-en">This list will look different in two years, and that's fine. We pick whatever gets the
+        idea working fastest and keeps it maintainable. The stack is a means. The thing being
+        built is the point.</span>
+        <span class="lang-id">Daftar ini akan terlihat berbeda dalam dua tahun, dan itu wajar. Kami memilih apa pun yang
+        membuat ide bekerja paling cepat dan tetap mudah dirawat. Tumpukan teknologi adalah sarana.
+        Yang dibangun itulah intinya.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- 6. THE AI ERA -->
+  <section id="ai">
+    <div class="wrap">
+      <span class="eyebrow reveal"><span class="lang-en">The AI Era</span><span class="lang-id">Era AI</span></span>
+      <h2 class="reveal"><span class="lang-en">What used to take a team now takes a decision.</span><span class="lang-id">Yang dulu butuh satu tim kini butuh satu keputusan.</span></h2>
+      <div class="prose reveal">
+        <p>
+          <span class="lang-en">Building software used to require large teams, many specialists, and long timelines
+          before anything worked. A lot of that cost was translation — turning intent into code,
+          code into infrastructure, infrastructure into something usable.</span>
+          <span class="lang-id">Membangun perangkat lunak dulu butuh tim besar, banyak spesialis, dan waktu panjang
+          sebelum apa pun berjalan. Sebagian besar biaya itu adalah penerjemahan — mengubah niat
+          menjadi kode, kode menjadi infrastruktur, infrastruktur menjadi sesuatu yang bisa dipakai.</span>
+        </p>
+        <p><span class="lang-en">AI collapses much of that translation layer. The shape of the work changes:</span><span class="lang-id">AI meruntuhkan sebagian besar lapisan penerjemahan itu. Bentuk pekerjaannya berubah:</span></p>
+      </div>
+
+      <div class="equation reveal">
+        <div class="row"><span class="lang-en">One person</span><span class="lang-id">Satu orang</span></div>
+        <div class="row"><span class="op">+</span> <span class="lang-en">Clear ideas</span><span class="lang-id">Ide yang jelas</span></div>
+        <div class="row"><span class="op">+</span> <span class="lang-en">Domain knowledge</span><span class="lang-id">Pengetahuan domain</span></div>
+        <div class="row"><span class="op">+</span> <span class="lang-en">AI agents</span><span class="lang-id">Agen AI</span></div>
+        <div class="row"><span class="op">+</span> <span class="lang-en">Persistence</span><span class="lang-id">Kegigihan</span></div>
+        <div class="row result"><span class="op">=</span> <span class="lang-en">Outcomes that used to need an organisation</span><span class="lang-id">Hasil yang dulu butuh sebuah organisasi</span></div>
+      </div>
+
+      <div class="prose reveal">
+        <p>
+          <span class="lang-en">The claim stops there. AI is not a replacement for thinking — it still can't tell you
+          which problem is worth solving, or when a system is quietly making things worse.</span>
+          <span class="lang-id">Klaimnya berhenti di situ. AI bukan pengganti berpikir — ia tetap tidak bisa memberi tahu
+          masalah mana yang layak diselesaikan, atau kapan sebuah sistem diam-diam memperburuk keadaan.</span>
+        </p>
+      </div>
+
+      <div class="role-cards reveal">
+        <div class="card"><div class="name"><span class="lang-en">Amplifier</span><span class="lang-id">Penguat</span></div><div class="role"><span class="lang-en">Makes a small team act larger than it is.</span><span class="lang-id">Membuat tim kecil bertindak lebih besar dari ukurannya.</span></div></div>
+        <div class="card"><div class="name"><span class="lang-en">Accelerator</span><span class="lang-id">Akselerator</span></div><div class="role"><span class="lang-en">Shortens the loop from idea to working version.</span><span class="lang-id">Mempersingkat putaran dari ide ke versi kerja.</span></div></div>
+        <div class="card"><div class="name"><span class="lang-en">Collaborator</span><span class="lang-id">Kolaborator</span></div><div class="role"><span class="lang-en">A partner to think out loud with, not defer to.</span><span class="lang-id">Teman untuk berpikir bersama, bukan untuk dituruti.</span></div></div>
+      </div>
+      <p class="not-autopilot reveal"><span class="lang-en">It's a co-pilot. Someone still has to fly.</span><span class="lang-id">Ia seorang ko-pilot. Tetap ada yang harus menerbangkan.</span></p>
+    </div>
+  </section>
+
+  <!-- 7. THE LONG-TERM VISION -->
+  <section id="vision">
+    <div class="wrap">
+      <span class="eyebrow reveal"><span class="lang-en">The Long-Term Vision</span><span class="lang-id">Visi Jangka Panjang</span></span>
+      <h2 class="reveal"><span class="lang-en">Build things that matter.</span><span class="lang-id">Bangun hal-hal yang berarti.</span></h2>
+      <p class="lead reveal">
+        <span class="lang-en">The goal was never a large number of apps. It's a set of systems that genuinely make
+        something work better — and an organisation shaped to keep making more of them.</span>
+        <span class="lang-id">Tujuannya tidak pernah sekadar banyak aplikasi. Ini tentang sekumpulan sistem yang
+        benar-benar membuat sesuatu bekerja lebih baik — dan sebuah organisasi yang dibentuk untuk
+        terus membuat lebih banyak lagi.</span>
+      </p>
+
+      <div class="prose reveal" style="margin-top: 26px;">
+        <p><span class="lang-en">Over time, The Dream Company wants to be:</span><span class="lang-id">Seiring waktu, The Dream Company ingin menjadi:</span></p>
+      </div>
+      <ul class="principle-list reveal">
+        <li><span class="lang-en">An ecosystem of products people actually depend on.</span><span class="lang-id">Ekosistem produk yang benar-benar diandalkan orang.</span></li>
+        <li><span class="lang-en">A laboratory where new ideas get a cheap, fast first test.</span><span class="lang-id">Laboratorium tempat ide baru mendapat uji pertama yang murah dan cepat.</span></li>
+        <li><span class="lang-en">An organisation where automation is the default, not the project.</span><span class="lang-id">Organisasi tempat otomasi adalah bawaan, bukan proyek.</span></li>
+        <li><span class="lang-en">A builder's environment where humans and AI agents work side by side.</span><span class="lang-id">Lingkungan pembangun tempat manusia dan agen AI bekerja berdampingan.</span></li>
+        <li><span class="lang-en">A collection of systems, each pointed at a real problem.</span><span class="lang-id">Kumpulan sistem, masing-masing mengarah ke masalah nyata.</span></li>
+      </ul>
+
+      <ul class="roadmap reveal">
+        <li><h3><span class="lang-en">Now — Build</span><span class="lang-id">Sekarang — Bangun</span></h3><p><span class="lang-en">Keep shipping small, useful systems from real problems.</span><span class="lang-id">Terus merilis sistem kecil yang berguna dari masalah nyata.</span></p></li>
+        <li><h3><span class="lang-en">Next — Connect</span><span class="lang-id">Berikutnya — Hubungkan</span></h3><p><span class="lang-en">Link what exists so shared data and users compound.</span><span class="lang-id">Kaitkan yang sudah ada agar data dan pengguna bersama saling berlipat.</span></p></li>
+        <li><h3><span class="lang-en">Then — Automate</span><span class="lang-id">Lalu — Otomasi</span></h3><p><span class="lang-en">Hand the repetitive work to jobs, scripts, and agents.</span><span class="lang-id">Serahkan pekerjaan berulang ke job, skrip, dan agen.</span></p></li>
+        <li><h3><span class="lang-en">Always — Learn</span><span class="lang-id">Selalu — Belajar</span></h3><p><span class="lang-en">Let usage, not opinion, decide what gets built next.</span><span class="lang-id">Biarkan pemakaian, bukan opini, yang menentukan apa yang dibangun berikutnya.</span></p></li>
+        <li class="future"><h3><span class="lang-en">Later — Expand</span><span class="lang-id">Nanti — Perluas</span></h3><p><span class="lang-en">Grow the ecosystem only where it adds real value.</span><span class="lang-id">Kembangkan ekosistem hanya di tempat yang menambah nilai nyata.</span></p></li>
+        <li class="future"><h3><span class="lang-en">Open — Imagine what comes next</span><span class="lang-id">Terbuka — Bayangkan yang datang berikutnya</span></h3><p><span class="lang-en">Leave room for the ideas we don't have yet.</span><span class="lang-id">Sisakan ruang untuk ide yang belum kami punya.</span></p></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 8. CLOSING MANIFESTO -->
+  <section class="closing">
+    <div class="wrap">
+      <p class="manifesto reveal">
+        <span><span class="lang-en">We don't know exactly what</span><span class="lang-id">Kami tidak tahu persis akan</span></span>
+        <span><span class="lang-en">The Dream Company will become.</span><span class="lang-id">menjadi apa The Dream Company.</span></span>
+        <span class="hi"><span class="lang-en">But we know how it starts —</span><span class="lang-id">Tapi kami tahu bagaimana ia dimulai —</span></span>
+        <span class="hi"><span class="lang-en">with one idea, then another,</span><span class="lang-id">dengan satu ide, lalu ide berikutnya,</span></span>
+        <span class="hi"><span class="lang-en">then the willingness to build.</span><span class="lang-id">lalu keberanian untuk membangun.</span></span>
+      </p>
+      <div class="signature reveal">The Dream Company</div>
+      <div class="tagline reveal"><span class="lang-en">Dream. Build. Learn. Repeat.</span><span class="lang-id">Bermimpi. Membangun. Belajar. Ulangi.</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="lang-en">A digital manifesto — for everything we're building, everything we've learned, and everything we still dare to imagine.</span>
+    <span class="lang-id">Sebuah manifesto digital — untuk semua yang sedang kami bangun, semua yang telah kami pelajari, dan semua yang masih berani kami bayangkan.</span>
+  </div>
+</footer>
+
+<script>
+  // language switch
+  var root = document.documentElement;
+  var langButtons = document.querySelectorAll('.lang-switch button');
+  function setLang(l) {
+    if (l !== 'en' && l !== 'id') l = 'en';
+    root.dataset.lang = l;
+    root.lang = l;
+    try { localStorage.setItem('tdc-lang', l); } catch (e) {}
+    langButtons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === l)); });
+  }
+  try { var saved = localStorage.getItem('tdc-lang'); if (saved) setLang(saved); } catch (e) {}
+  langButtons.forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.lang); }); });
+
+  // mobile nav
+  var toggle = document.querySelector('.nav-toggle');
+  var links = document.querySelector('.nav-links');
+  toggle.addEventListener('click', function () {
+    var open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+  links.addEventListener('click', function (e) {
+    if (e.target.closest('a')) { links.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); }
+  });
+
+  // scroll reveal
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+# Track only the deliverable files — ignore everything else by default.
+*
+!.gitignore
+!index.html
+!mockup-spec.md
