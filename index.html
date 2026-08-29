@@ -540,6 +540,17 @@
     .eco-cols { grid-template-columns: 1fr; }
     .role-cards { grid-template-columns: 1fr; }
     .flow-step:not(:last-child)::after { content: "↓"; right: 50%; top: auto; bottom: -12px; transform: translateX(50%); }
+
+    /* bump small text so it stays readable on phones */
+    .flow-step .d,
+    .card .role,
+    .roadmap li p,
+    .tech-note { font-size: 15px; }
+    .cycle-node .sub,
+    .tech-grid span,
+    .equation { font-size: 14px; }
+    .card .tags span,
+    .card .evolve { font-size: 12.5px; }
   }
 </style>
 </head>
