@@ -22,7 +22,7 @@ and what it still intends to build — not a product catalog. It answers:
 |---|---------|---------|
 | 1 | Hero | Name + three-line manifesto, abstract orbit visual (pure CSS). |
 | 2 | The Philosophy | Idea → System → Product → Ecosystem, told as prose + a 6-step flow. |
-| 3 | What We Have Built | Connected ecosystem map, two groups: Business Systems / Internal & Experiments. Includes **School Community** as a real example of an internal system that became a platform (links to https://schoolcommunity.space/). |
+| 3 | What We Have Built | Connected ecosystem map, two groups: Business Systems / Internal & Experiments. Includes **Brokado** (https://brokado.online) and **School Community** as real, live examples (each card links out to its site). |
 | 4 | How We Build | Build → Learn → Improve → Automate → Scale, plus principles. |
 | 5 | Technology Playground | Tool list framed as "tools are temporary, the ability to build is permanent". |
 | 6 | The AI Era | AI as amplifier / accelerator / collaborator — not autopilot. |
