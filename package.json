@@ -1,0 +1,30 @@
+{
+  "name": "thedreamcompany",
+  "version": "1.0.0",
+  "description": "",
+  "main": "playwright.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "node tests/smoke.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imansubarkah09/thedreamcompany.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/imansubarkah09/thedreamcompany/issues"
+  },
+  "homepage": "https://github.com/imansubarkah09/thedreamcompany#readme",
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
+    "axe-core": "^4.13.0",
+    "wrangler": "^4.145.0"
+  }
+}

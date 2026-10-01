@@ -4,6 +4,11 @@
 !.github/
 !.github/workflows/
 !.github/workflows/deploy.yml
+!package.json
+!package-lock.json
+!tests/
+!tests/smoke.test.js
+!playwright.config.js
 !index.html
 !mockup-spec.md
 !worker.mjs
