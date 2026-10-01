@@ -1,6 +1,11 @@
 # Track only the deliverable files — ignore everything else by default.
 *
 !.gitignore
+!.github/
+!.github/workflows/
+!.github/workflows/deploy.yml
 !index.html
 !mockup-spec.md
+!worker.mjs
+!wrangler.jsonc
 !vercel.json
