@@ -23,4 +23,4 @@ jobs:
           workingDirectory: .
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy worker.mjs
+          command: deploy worker.mjs --name thedreamcompany
