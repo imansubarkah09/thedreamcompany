@@ -1,15 +1,44 @@
-name: Deploy to Cloudflare
+name: CI and Deploy to Cloudflare
 
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run smoke tests
+        run: npm test
+
+  deploy:
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
 
       - name: Prepare static assets
         run: |
@@ -23,4 +52,4 @@ jobs:
           workingDirectory: .
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy worker.mjs --name thedreamcompany --compatibility-date 2026-10-01
+          command: deploy --config wrangler.jsonc
