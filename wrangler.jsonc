@@ -4,10 +4,6 @@
   "compatibility_date": "2026-10-01",
   "compatibility_flags": ["nodejs_compat"],
   "workers_dev": true,
-  "routes": [
-    { "pattern": "thedreamcompany.space", "custom_domain": true },
-    { "pattern": "www.thedreamcompany.space", "custom_domain": true }
-  ],
   "assets": {
     "directory": "dist",
     "binding": "ASSETS"
