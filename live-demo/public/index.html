@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Novelis: ruang kerja penulis novel bersama Claude | The Dream Company</title>
+<meta name="description" content="Novelis (Fizzo Lab): tulis, terjemahkan, analisa, dan jadwalkan terbit bab novel ke Fizzo bersama Claude, dari Lab The Dream Company. Dibangun 100% dengan Claude Code." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #08090c;
+    --panel: #101319;
+    --line: rgba(255, 255, 255, 0.08);
+    --line-strong: rgba(255, 255, 255, 0.16);
+    --text: #e9ecf2;
+    --text-dim: #9aa2b1;
+    --text-faint: #5c6373;
+    --accent: #6ea8ff;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.6 Inter, system-ui, sans-serif; }
+  main { max-width: 960px; margin: 0 auto; padding: 48px 20px 64px; }
+  .eyebrow { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+  h1 { font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: clamp(30px, 4.5vw, 44px); line-height: 1.15; margin: 8px 0 14px; }
+  h2 { font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 24px; margin: 48px 0 6px; }
+  h3 { font-size: 15px; font-weight: 600; margin: 0 0 4px; }
+  p { color: var(--text-dim); margin: 0 0 12px; max-width: 680px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; margin: 22px 0 8px; }
+  .btn { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 18px; border-radius: 10px; font-weight: 500; text-decoration: none; }
+  .btn-primary { background: var(--accent); color: #08090c; }
+  .btn-ghost { border: 1px solid var(--line-strong); color: var(--text); }
+  .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); margin-top: 16px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+  .card p { font-size: 14px; margin: 0; }
+  .card ul { margin: 8px 0 0; padding-left: 18px; color: var(--text-dim); font-size: 14px; }
+  ol.steps { padding-left: 20px; color: var(--text-dim); max-width: 720px; }
+  ol.steps li { margin-bottom: 6px; }
+  ol.steps b, .card b { color: var(--text); font-weight: 500; }
+  .note { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <span class="eyebrow">Novelis · Fizzo Lab</span>
+  <h1>Ruang kerja penulis novel, dari ide sampai bab terbit di Fizzo</h1>
+  <p>Novelis menyatukan semua pekerjaan penulis novel Fizzo di satu tempat di Lab The Dream Company: ngobrol ide, menulis dan menerjemahkan bab bersama Claude, memantau pembaca dan bonus, sampai robot yang menjadwalkan bab ke akun fizzo.org milik penulis sendiri.</p>
+  <p>Novelis perlu login dan saat ini hanya dibuka untuk member undangan. Halaman ini menjelaskan fiturnya; rekaman layar aslinya bisa ditonton di live demo.</p>
+  <div class="cta">
+    <a class="btn btn-primary" href="/live-demo">Tonton live demo (58 detik)</a>
+    <a class="btn btn-ghost" href="https://product.thedreamcompany.space/novelis-studio">Info langganan Novelis</a>
+  </div>
+
+  <h2>Pantau novel Anda</h2>
+  <p>Angka yang penting bagi penulis Fizzo, dalam satu layar.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>Dashboard</h3>
+      <p>Tabel per novel: pembaca hari ini dan bulan ini, bab terbit, terjadwal sampai tanggal berapa, amunisi (stok bab yang belum terbit), dan progres menuju bonus Fizzo berikutnya.</p>
+      <ul>
+        <li>Peringatan <b>amunisi habis</b> supaya tidak libur update.</li>
+        <li>Novel yang <b>paling dekat ke bonus</b> berikutnya, lengkap dengan sisa kata.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Novel Saya</h3>
+      <p>Semua novel dari folder Lab penulis. Tiap novel punya halaman detail: sampul, Story Info, sinopsis, dan status tiap bab (misalnya Siap diunggah atau Pending).</p>
+    </div>
+    <div class="card">
+      <h3>Baca bab langsung</h3>
+      <p>Bab bisa dibaca dari Novelis tanpa membuka editor, untuk mengecek alur sebelum dijadwalkan terbit.</p>
+    </div>
+  </div>
+
+  <h2>Studio bersama Claude</h2>
+  <p>Setiap studio adalah sesi Claude Code di folder novel penulis, memakai akun Claude resmi milik penulis sendiri. Obrolan tersimpan dan bisa dilanjutkan dari perangkat mana pun.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>Ngobrol Ide</h3>
+      <p>Belum punya ide? Diskusikan tokoh, dunia, konflik, dan arah cerita dengan Claude sebelum menulis. Di sini Claude tidak mengubah berkas apa pun.</p>
+    </div>
+    <div class="card">
+      <h3>Studio Menulis</h3>
+      <p>Dari ide ke bab: Claude menyusun tokoh, dunia, dan kerangka bersama penulis, lalu menulis bab ke folder novel. Bab minimal 1.100 kata dan langsung tampil di Novel Saya.</p>
+    </div>
+    <div class="card">
+      <h3>Studio Terjemah</h3>
+      <p>Terjemahkan naskah Mandarin atau Inggris yang boleh diterjemahkan (karya sendiri, ada izin tertulis, atau bebas hak cipta) ke Bahasa Indonesia baku sesuai KBBI dan EYD V, bab demi bab.</p>
+      <ul>
+        <li>Glosarium nama, sapaan, dan istilah supaya konsisten antar bab.</li>
+        <li>Cek mekanis: sisa huruf Han, tanda baca Mandarin, kata tidak baku, pola terjemahan mesin.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Analisa</h3>
+      <p>Bahas novel bersama Claude: konsistensi tokoh dan garis waktu, thread yang terbengkalai, pola repetisi, ringkasan arc, sampai kenapa pembaca turun di bab tertentu. Claude hanya membaca, tidak mengubah berkas.</p>
+    </div>
+  </div>
+
+  <h2>Robot jadwal terbit</h2>
+  <p>Bab yang siap dijadwalkan ke fizzo.org secara otomatis, dari akun penulis sendiri.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>Robot Fizzo di GitHub penulis</h3>
+      <p>Folder novel menjadi repo privat di akun GitHub milik penulis, dan robot berjalan di sana. Penulis memilih hari dan jam terbit (jarak minimal 2 jam); robot dipicu otomatis pukul 05:00 WIB pada hari terpilih dan menjadwalkan bab yang sudah siap.</p>
+    </div>
+    <div class="card">
+      <h3>Tanpa menyerahkan password</h3>
+      <p>Robot masuk ke fizzo.org memakai cookie yang ditempel penulis sendiri di halaman Pengaturan, bukan password. Novelis mengingatkan kalau cookie perlu diperbarui.</p>
+    </div>
+    <div class="card">
+      <h3>Cek mutu sebelum terbit</h3>
+      <p>Bab baru berstatus Siap diunggah kalau lolos cek: panjang minimal 1.100 kata dan tanpa tanda pisah panjang. Bab yang belum lolos tetap Pending dan tidak dijadwalkan.</p>
+    </div>
+  </div>
+
+  <h2>Mulai dalam lima bagian</h2>
+  <p>Panduan langkah demi langkah tersedia di dalam Novelis. Ringkasnya:</p>
+  <ol class="steps">
+    <li><b>Siapkan akun:</b> akun Claude berbayar, akun penulis fizzo.org dengan bukunya, dan akun GitHub.</li>
+    <li><b>Tulis bab</b> di Studio Menulis bersama Claude.</li>
+    <li><b>Sambungkan robot:</b> folder novel ke GitHub, isi Book ID fizzo.org, hari, dan jam terbit.</li>
+    <li><b>Tempel cookie fizzo.org</b> di Pengaturan (ulangi kalau diingatkan).</li>
+    <li><b>Kirim bab ke GitHub</b>, lalu robot bekerja sendiri sesuai jadwal.</li>
+  </ol>
+
+  <p class="note">Novelis adalah produk <a href="https://thedreamcompany.space/#built">The Dream Company</a>, dibangun 100% dengan Claude Code (vibe coding).</p>
+</main>
+</body>
+</html>
