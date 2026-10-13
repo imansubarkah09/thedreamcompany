@@ -1,0 +1,17 @@
+{
+  // Worker terpisah untuk novel.thedreamcompany.space/live-demo (video demo Fizzo Lab).
+  // Deploy manual: npx wrangler deploy --config live-demo/wrangler.jsonc
+  "name": "novel-live-demo",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": false,
+  "routes": [
+    { "pattern": "novel.thedreamcompany.space", "custom_domain": true }
+  ],
+  "assets": {
+    "directory": "public",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "html_handling": "none"
+  }
+}

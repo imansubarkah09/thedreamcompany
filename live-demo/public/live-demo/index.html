@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Live Demo Novelis (Fizzo Lab) | The Dream Company</title>
+<meta name="description" content="Rekaman layar asli Fizzo Lab: ruang kerja penulis novel di Lab The Dream Company, dibangun 100% dengan Claude Code." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #08090c;
+    --panel: #101319;
+    --line: rgba(255, 255, 255, 0.08);
+    --line-strong: rgba(255, 255, 255, 0.16);
+    --text: #e9ecf2;
+    --text-dim: #9aa2b1;
+    --text-faint: #5c6373;
+    --accent: #6ea8ff;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.6 Inter, system-ui, sans-serif; }
+  main { max-width: 960px; margin: 0 auto; padding: 48px 20px 64px; }
+  .eyebrow { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+  h1 { font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: clamp(28px, 4vw, 40px); line-height: 1.2; margin: 8px 0 12px; }
+  p { color: var(--text-dim); margin: 0 0 12px; max-width: 680px; }
+  video { display: block; width: 100%; aspect-ratio: 16 / 9; margin-top: 24px; border: 1px solid var(--line-strong); border-radius: 12px; background: #000; }
+  ol { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 4px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  ol button { width: 100%; min-height: 44px; display: flex; gap: 10px; align-items: center; padding: 8px 10px; border: 0; border-radius: 8px; background: none; color: var(--text-dim); font: inherit; font-size: 13px; text-align: left; cursor: pointer; }
+  ol button:hover, ol button.on { background: rgba(110, 168, 255, 0.12); color: var(--text); }
+  ol time { font-variant-numeric: tabular-nums; color: var(--text-faint); }
+  .note { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <span class="eyebrow">Live demo</span>
+  <h1>Novelis di Fizzo Lab</h1>
+  <p>Rekaman layar asli (58 detik) ruang kerja penulis novel di Lab The Dream Company: dashboard pembaca, naskah dari folder Lab, robot jadwal terbit bab ke Fizzo lewat GitHub milik penulis sendiri, dan Studio Menulis bersama Claude.</p>
+  <p>Novelis hanya dibuka untuk member undangan, jadi halaman ini menampilkan rekamannya. Seperti produk lain di The Dream Company, Novelis dibangun 100% dengan Claude Code (vibe coding).</p>
+
+  <video id="v" poster="/video/fizzo-lab-demo-poster.jpg" controls playsinline preload="metadata"></video>
+  <ol id="bab"></ol>
+
+  <p class="note">Produk lain dari The Dream Company: <a href="https://thedreamcompany.space/#built">thedreamcompany.space</a></p>
+</main>
+<script>
+  // Sama dengan DEMO_CHAPTERS di Fizzo Lab (src/app/agent/fizzo-pane.tsx, repo thedreamcompany-product).
+  const BAB = [
+    [0, 'Dashboard: pembaca, bonus, dan stok bab'],
+    [8, 'Novel Saya: novel dari folder Lab Anda'],
+    [14, 'Detail novel: sampul dan Story Info'],
+    [19, 'Status bab dan rencana jadwal robot'],
+    [23, 'Baca bab langsung di Lab'],
+    [32, 'Robot Fizzo lewat GitHub Anda sendiri'],
+    [39, 'Studio Menulis: Claude menulis bab'],
+    [51, 'Panduan langkah demi langkah'],
+  ]
+  const SRC = '/video/fizzo-lab-demo.webm'
+  const v = document.getElementById('v')
+  const ol = document.getElementById('bab')
+  // Server aset Workers tidak mendukung Range, jadi video diputar dari blob supaya lompat ke bab tetap jalan.
+  fetch(SRC).then((r) => r.blob()).then((b) => { v.src = URL.createObjectURL(b) }, () => { v.src = SRC })
+  const tombol = BAB.map(([t, label]) => {
+    const li = document.createElement('li')
+    const b = document.createElement('button')
+    b.type = 'button'
+    b.innerHTML = `<time>${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}</time>`
+    b.append(label)
+    b.onclick = () => { v.currentTime = t; v.play() }
+    li.append(b)
+    ol.append(li)
+    return b
+  })
+  v.ontimeupdate = () => {
+    let i = -1
+    BAB.forEach(([t], j) => { if (v.currentTime >= t) i = j })
+    tombol.forEach((b, j) => b.classList.toggle('on', j === i))
+  }
+</script>
+</body>
+</html>
