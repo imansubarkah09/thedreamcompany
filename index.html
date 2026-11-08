@@ -441,7 +441,7 @@ h2, h3 { line-height: 1.35; }
     position: relative;
     width: min(520px, 82vw);
     aspect-ratio: 1;
-    margin: 90px auto 0;
+    margin: 48px auto 0;
   }
   .orbits .ring {
     position: absolute;
@@ -652,32 +652,6 @@ h2, h3 { line-height: 1.35; }
   .workshop p { font-size: 13.5px; color: var(--text-faint); }
   .workshop .tags { justify-content: center; }
 
-  /* ---------- live strip (hero) ---------- */
-  .live-strip { margin-top: 34px; animation: hero-fade-in 0.6s var(--ease) 0.4s forwards; opacity: 0; }
-  .live-strip p {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 11.5px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--text-faint);
-    margin-bottom: 12px;
-  }
-  .live-strip ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
-  .live-strip a {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 7px 14px;
-    border: 1px solid var(--line-strong);
-    border-radius: 999px;
-    color: var(--text-dim);
-    text-decoration: none;
-    font-size: 13.5px;
-    transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
-  }
-  .live-strip a::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--live); }
-  .live-strip a:hover { color: var(--text); border-color: var(--accent); }
-
   /* ---------- dream → real ---------- */
   .proof { display: block; margin-top: 4px; font-size: 14.5px; color: var(--text); }
   .proof::before { content: "✓ "; color: var(--live); }
@@ -826,7 +800,6 @@ h2, h3 { line-height: 1.35; }
     .hero h1,
     .hero-manifesto,
     .cta-row,
-    .live-strip,
     .orbits,
     .orbits .ring,
     .orbits .core,
@@ -939,16 +912,6 @@ h2, h3 { line-height: 1.35; }
       <div class="cta-row">
         <a href="#built" class="btn btn-primary"><span class="lang-en">See what we've built →</span><span class="lang-id">Lihat yang telah dibangun →</span></a>
       </div>
-      <div class="live-strip">
-        <p><span class="lang-en">Already running, open it today</span><span class="lang-id">Sudah berjalan, bisa dibuka hari ini</span></p>
-        <ul>
-          <li><a href="https://schoolcommunity.space/" target="_blank" rel="noopener noreferrer">School Community</a></li>
-          <li><a href="https://guyub.thedreamcompany.space" target="_blank" rel="noopener noreferrer">Guyub</a></li>
-          <li><a href="https://brokado.online" target="_blank" rel="noopener noreferrer">Brokado</a></li>
-          <li><a href="https://novel.thedreamcompany.space" target="_blank" rel="noopener noreferrer">Novelis</a></li>
-        </ul>
-      </div>
-
       <div class="orbits" aria-label="Visual metaphor: six orbiting nodes represent the journey from Dream → Idea → Experiment → System → Product → Ecosystem, with the glowing core as the unifying purpose">
         <div class="ring r1"></div>
         <div class="ring r2"></div>
